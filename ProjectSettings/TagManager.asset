@@ -41,12 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-<<<<<<< HEAD
+  - name: Background
+    uniqueID: 133739999
+    locked: 0
   - name: Lasers
-    uniqueID: 3042283975
+    uniqueID: 3348697643
     locked: 0
-  - name: Player
-    uniqueID: 1347094959
+  - name: Player-Enemy
+    uniqueID: 2670603783
     locked: 0
-=======
->>>>>>> b4ae967a8afdce28b648e5af9f75a523f12f3f62
