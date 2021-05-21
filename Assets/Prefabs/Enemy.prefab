@@ -116,6 +116,10 @@ MonoBehaviour:
   maxTimeBetweenShots: 3
   projectileSpeed: 5
   projectilePrefab: {fileID: 8933635820435941597, guid: 4948060e0ec26154393bfa96c89e83ec, type: 3}
+  deathSound: {fileID: 8300000, guid: 28503be54e3fc2248ad26c5cc35476af, type: 3}
+  deathSoundVolume: 0.25
+  shootSound: {fileID: 8300000, guid: b4d8722c46c1ca1478d8efcac358d1b9, type: 3}
+  shootSoundVolume: 0.25
 --- !u!60 &6485888286926352688
 PolygonCollider2D:
   m_ObjectHideFlags: 0

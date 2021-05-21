@@ -110,12 +110,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e128e3e4b208ad44da6421ec482ab125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
+  health: 4000
   shotCounter: 0
   minTimeBetweenShots: 0.2
-  maxTimeBetweenShots: 3
-  projectileSpeed: 5
+  maxTimeBetweenShots: 2
+  projectileSpeed: 10
   projectilePrefab: {fileID: 8933635820435941597, guid: 4948060e0ec26154393bfa96c89e83ec, type: 3}
+  deathSound: {fileID: 8300000, guid: 4dd7a34ff6c842c42acfab6509a1018c, type: 3}
+  deathSoundVolume: 0.5
+  shootSound: {fileID: 8300000, guid: b4d8722c46c1ca1478d8efcac358d1b9, type: 3}
+  shootSoundVolume: 0.25
 --- !u!60 &6870733602498071370
 PolygonCollider2D:
   m_ObjectHideFlags: 0

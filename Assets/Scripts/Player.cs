@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 
 public class Player : MonoBehaviour
 {
     [Header("Player")]
     [SerializeField] float moveSpeed = 10f;
-    [SerializeField] int health = 200;
+    [SerializeField] int health = 300;
+    [SerializeField] AudioClip deathSound;
+    [SerializeField] [Range(0, 1)] float deathSoundVolume = 0.25f;
+    [SerializeField] AudioClip shootSound;
+    [SerializeField] [Range(0, 1)] float shootSoundVolume = 0.25f;
 
     [Header("Projectile")]
     [SerializeField] GameObject laserPrefabL;
@@ -71,6 +76,8 @@ public class Player : MonoBehaviour
             GameObject laserR = Instantiate(laserPrefabR, new Vector2(transform.position.x + (GetComponent<SpriteRenderer>().bounds.size.x/3), transform.position.y + (GetComponent<SpriteRenderer>().bounds.size.y/2)), Quaternion.identity) as GameObject;
             laserR.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
 
+            AudioSource.PlayClipAtPoint(shootSound, Camera.main.transform.position, shootSoundVolume);
+
             yield return new WaitForSeconds(laserTimeGap);
         }        
     }
@@ -92,8 +99,22 @@ public class Player : MonoBehaviour
 
     private void ProcessHit(DamageDealer damageDealer)
     {
-        health -= damageDealer.GetDamage();
-        damageDealer.Hit();
+        if(damageDealer != null)
+        {
+            Destroy(GameObject.Find("Life (" + health / 100 + ")"));
+            health -= damageDealer.GetDamage();
+            damageDealer.Hit();
+        }
+
+        if (health <= 0)
+        {
+            StartCoroutine(Kill());
+        }
+    }
+    public void HitByEnemy()
+    {
+        Destroy(GameObject.Find("Life (" + health / 100 + ")"));
+        health -= 100;
 
         if (health <= 0)
         {
@@ -104,8 +125,10 @@ public class Player : MonoBehaviour
     private IEnumerator Kill()
     {
         animator.SetTrigger("Dead");
+        AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, deathSoundVolume);
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
+        SceneManager.LoadScene("Game");
     }
 
     private void SetUpMoveBoundaries()
@@ -119,15 +142,5 @@ public class Player : MonoBehaviour
         xMax = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - xpadding;
         yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + ypaddingS;
         yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - ypaddingN;
-    }
-
-    public void HitByEnemy()
-    {
-        health -= 100;
-
-        if (health <= 0)
-        {
-            StartCoroutine(Kill());
-        }
     }
 }

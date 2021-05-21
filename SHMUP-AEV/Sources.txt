@@ -1,0 +1,5 @@
+https://www.kenney.nl/assets/sci-fi-sounds
+https://incompetech.filmmusic.io/song/3351-all-this/
+https://answers.unity.com/questions/960170/how-to-find-width-and-height-of-sprite-object-unit.html
+https://answers.unity.com/questions/1414048/destroy-specific-gameobject-with-name.html
+https://www.udemy.com/course/unitycourse/

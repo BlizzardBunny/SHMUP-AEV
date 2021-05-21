@@ -99,8 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac69a7c7d8f1cee40a2646dd58363a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  health: 200
+  moveSpeed: 12.5
+  health: 300
+  deathSound: {fileID: 8300000, guid: df483f3b60ab7b84795e1ac63dfafc62, type: 3}
+  deathSoundVolume: 0.5
+  shootSound: {fileID: 8300000, guid: ffb7bc226f2796645b183b01bb3dc76f, type: 3}
+  shootSoundVolume: 0.25
   laserPrefabL: {fileID: 8933635820435941597, guid: 2768c5139132c4540ab150f512a8dd92, type: 3}
   laserPrefabM: {fileID: 8933635820435941597, guid: 8230b983f238bde42838e3d9f255ec89, type: 3}
   laserPrefabR: {fileID: 8933635820435941597, guid: 78971a79f97ff6b43b288c376c73c83a, type: 3}
