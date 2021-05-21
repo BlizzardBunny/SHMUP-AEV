@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 3727450091421796964}
   - component: {fileID: 7168553721355816281}
   - component: {fileID: 6770744981788439888}
-  m_Layer: 0
+  - component: {fileID: 1645964426684288367}
+  m_Layer: 10
   m_Name: PlayerLaser_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,3 +136,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
+--- !u!95 &1645964426684288367
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8933635820435941597}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9e0551e9693d77047a305266baf2db63, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Player : MonoBehaviour
     [SerializeField] float laserSpeed = 10f;
     [SerializeField] float laserTimeGap = 0.1f;
 
+    Animator animator;
+
     float xMin, xMax, yMin, yMax;
 
     Coroutine firingCoroutine;
@@ -23,6 +26,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         SetUpMoveBoundaries();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -73,12 +77,17 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
-
-        if (!other.gameObject.name.Contains("PlayerLaser"))
+        DamageDealer damageDealer;
+        try
         {
-            ProcessHit(damageDealer);
+            damageDealer = other.gameObject.GetComponent<DamageDealer>();
         }
+        catch (NullReferenceException ex)
+        {
+            return;
+        }
+
+        ProcessHit(damageDealer);
     }
 
     private void ProcessHit(DamageDealer damageDealer)
@@ -88,8 +97,15 @@ public class Player : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            StartCoroutine(Kill());
         }
+    }
+
+    private IEnumerator Kill()
+    {
+        animator.SetTrigger("Dead");
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
     }
 
     private void SetUpMoveBoundaries()
@@ -103,5 +119,15 @@ public class Player : MonoBehaviour
         xMax = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - xpadding;
         yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + ypaddingS;
         yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - ypaddingN;
+    }
+
+    public void HitByEnemy()
+    {
+        health -= 100;
+
+        if (health <= 0)
+        {
+            StartCoroutine(Kill());
+        }
     }
 }

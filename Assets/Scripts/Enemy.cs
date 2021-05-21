@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,10 +12,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] float projectileSpeed = 5f;
     [SerializeField] GameObject projectilePrefab;
 
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
-        shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+        shotCounter = UnityEngine.Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -29,7 +33,7 @@ public class Enemy : MonoBehaviour
         if (shotCounter <= 0f)
         {
             Fire();
-            shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+            shotCounter = UnityEngine.Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
         }
     }
 
@@ -41,22 +45,43 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
-
-        if (!other.gameObject.name.Contains("EnemyLaser"))
+        DamageDealer damageDealer;
+        try
         {
-            ProcessHit(damageDealer);
+            damageDealer = other.gameObject.GetComponent<DamageDealer>();
         }
+        catch (NullReferenceException ex)
+        {
+            return;
+        }
+
+        ProcessHit(damageDealer);
     }
 
     private void ProcessHit(DamageDealer damageDealer)
     {
         health -= damageDealer.GetDamage();
-        damageDealer.Hit();
+
+        if (damageDealer.gameObject.name != "Player")
+        {
+            damageDealer.Hit();
+        }
+        else
+        {
+            Player player = damageDealer.gameObject.GetComponent<Player>();
+            player.HitByEnemy();
+        }
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            StartCoroutine(Kill());
         }
+    }
+
+    private IEnumerator Kill()
+    {
+        animator.SetTrigger("Dead");
+        yield return new WaitForSeconds(0.2f);
+        Destroy(gameObject);
     }
 }
