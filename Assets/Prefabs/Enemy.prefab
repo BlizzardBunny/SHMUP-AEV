@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6734223302042169818}
   - component: {fileID: 6734223302042169817}
   - component: {fileID: 7732034976749668296}
+  - component: {fileID: 8179394062362807274}
+  - component: {fileID: 6485888286926352688}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -72,12 +74,12 @@ SpriteRenderer:
   m_SortingLayerID: -1624363513
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4ebc0457a52070e4c8a3eb5ca78979fa, type: 3}
+  m_Sprite: {fileID: -2876886793340247621, guid: 9de77742513ea114a9b74699aca91c70, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.93, y: 0.84}
+  m_Size: {x: 1.11, y: 1.52}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -95,5 +97,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f607b116da53364f845ccdc2c14e15e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveConfig: {fileID: 11400000, guid: 87b790e48189c134c88796b708edf1e0, type: 2}
-  moveSpeed: 3
+--- !u!114 &8179394062362807274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6734223302042169816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e128e3e4b208ad44da6421ec482ab125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  shotCounter: 0
+  minTimeBetweenShots: 0.2
+  maxTimeBetweenShots: 3
+  projectileSpeed: 5
+  projectilePrefab: {fileID: 8933635820435941597, guid: 4948060e0ec26154393bfa96c89e83ec, type: 3}
+--- !u!60 &6485888286926352688
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6734223302042169816}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.11, y: 1.52}
+    newSize: {x: 1.11, y: 1.52}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.265, y: -0.14}
+      - {x: 0.36499998, y: 0.12}
+      - {x: 0.45499998, y: 0.39}
+      - {x: 0.505, y: 0.57}
+      - {x: 0.555, y: 0.69}
+      - {x: 0.525, y: 0.71999997}
+      - {x: 0.505, y: 0.72999996}
+      - {x: 0.435, y: 0.63}
+      - {x: 0.355, y: 0.53}
+      - {x: 0.225, y: 0.35}
+      - {x: 0.155, y: 0.35}
+      - {x: 0.155, y: 0.44}
+      - {x: 0.145, y: 0.52}
+      - {x: 0.125, y: 0.55}
+      - {x: 0.005, y: 0.57}
+      - {x: -0.044999998, y: 0.53}
+      - {x: -0.055, y: 0.32999998}
+      - {x: -0.205, y: 0.39}
+      - {x: -0.375, y: 0.59999996}
+      - {x: -0.505, y: 0.76}
+      - {x: -0.525, y: 0.76}
+      - {x: -0.545, y: 0.75}
+      - {x: -0.545, y: 0.68}
+      - {x: -0.53499997, y: 0.59}
+      - {x: -0.49499997, y: 0.48}
+      - {x: -0.415, y: 0.39999998}
+      - {x: -0.405, y: 0.31}
+      - {x: -0.345, y: 0.24}
+      - {x: -0.36499998, y: 0.17}
+      - {x: -0.24499999, y: -0.049999997}
+      - {x: -0.195, y: -0.19}
+      - {x: -0.105, y: -0.42}
+      - {x: -0.005, y: -0.76}
+      - {x: 0.055, y: -0.76}
+      - {x: 0.074999996, y: -0.69}
+      - {x: 0.175, y: -0.45999998}
+      - {x: 0.185, y: -0.35999998}
+    - - {x: -0.515, y: 0.39999998}
+      - {x: -0.49499997, y: 0.38}
+      - {x: -0.465, y: 0.39}
+      - {x: -0.465, y: 0.42999998}
+      - {x: -0.48499998, y: 0.45}
+      - {x: -0.515, y: 0.44}

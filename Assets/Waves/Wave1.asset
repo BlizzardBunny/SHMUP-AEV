@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NewBehaviourScript
   enemyPrefab: {fileID: 6734223302042169816, guid: 0d0fef18100ed5744bf073de4c019559, type: 3}
   pathPrefab: {fileID: 1422738928211714653, guid: 4f9aff70046e17244b7967f629162cc6, type: 3}
-  timeBetweenSpawns: 0.5
+  timeBetweenSpawns: 1
   spawnRandomFactor: 0.3
-  numberOfEnemies: 5
-  moveSpeed: 2
+  numberOfEnemies: 10
+  moveSpeed: 5
