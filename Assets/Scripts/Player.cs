@@ -42,8 +42,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Fire();
+        if (isDying == false)
+        {
+            Move();
+            Fire();
+        }
+        else
+        {
+            StopCoroutine(firingCoroutine);
+        }
     }   
 
     private void Move()
