@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField] [Range(0, 1)] float deathSoundVolume = 0.25f;
     [SerializeField] AudioClip shootSound;
     [SerializeField] [Range(0, 1)] float shootSoundVolume = 0.25f;
+    [SerializeField] AudioClip hitSound;
+    [SerializeField] [Range(0, 1)] float hitSoundVolume = 0.25f;
 
     [Header("Projectile")]
     [SerializeField] GameObject laserPrefabL;
@@ -25,6 +27,8 @@ public class Player : MonoBehaviour
 
     float xMin, xMax, yMin, yMax;
 
+    bool isDying;
+
     Coroutine firingCoroutine;
 
     // Start is called before the first frame update
@@ -32,6 +36,7 @@ public class Player : MonoBehaviour
     {
         SetUpMoveBoundaries();
         animator = GetComponent<Animator>();
+        isDying = false;
     }
 
     // Update is called once per frame
@@ -106,9 +111,13 @@ public class Player : MonoBehaviour
             damageDealer.Hit();
         }
 
-        if (health <= 0)
+        if ((health <= 0) && (isDying == false))
         {
             StartCoroutine(Kill());
+        }
+        else if (isDying == false)
+        {
+            AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position, hitSoundVolume);
         }
     }
     public void HitByEnemy()
@@ -116,7 +125,7 @@ public class Player : MonoBehaviour
         Destroy(GameObject.Find("Life (" + health / 100 + ")"));
         health -= 100;
 
-        if (health <= 0)
+        if ((health <= 0) && (isDying == false))
         {
             StartCoroutine(Kill());
         }
@@ -124,11 +133,15 @@ public class Player : MonoBehaviour
 
     private IEnumerator Kill()
     {
+        isDying = true;
+
         animator.SetTrigger("Dead");
         AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, deathSoundVolume);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         Destroy(gameObject);
         SceneManager.LoadScene("Game");
+
+        isDying = false;
     }
 
     private void SetUpMoveBoundaries()
